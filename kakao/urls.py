@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from alpaca.views import *
+from alpaca import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^keyboard/', alpaca.views.keyboard),
+    url(r'^keyboard/', views.keyboard),
 ]
