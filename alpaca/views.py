@@ -4,11 +4,10 @@ from django.views.decorators.csrf import csrf_exempt
 import json, datetime
 
 def keyboard(request):
-
-    return JsonResponse({
-        'type' : 'buttons',
-        'buttons' : ['B1', 'B2', 'B3']
-    })
+	return JsonResponse({
+		'type' : 'buttons',
+		'buttons' : ['B1', 'B2', 'B3']
+		})
 
 @csrf_exempt
 def answer(request):
@@ -27,3 +26,5 @@ def answer(request):
             }
 
         })
+
+
