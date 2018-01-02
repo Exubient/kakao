@@ -6,7 +6,7 @@ import json, datetime
 def keyboard(request):
 	return JsonResponse({
 		'type' : 'buttons',
-		'buttons' : ['B1', 'B2', 'B3']
+		'buttons' : ['C1', 'C2', 'C3']
 		})
 
 @csrf_exempt
@@ -17,7 +17,7 @@ def answer(request):
 
     requestMode = return_str.encode('utf-8')  # utf-8형식으로 인코딩하여 한글을 인식
 
-    if requestMode == "B1":
+    if return_str=="C1":
         return JsonResponse({
                 'message': {
                     'text': 'test worked'
