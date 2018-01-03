@@ -15,6 +15,10 @@ def answer(request):
     received_json_data = json.loads(json_str)
     market = received_json_data['content']
     
+    with open(r'coin.csv', 'r') as f:
+        reader = csv.reader(f)
+        for row in reader:
+            print ', '.join(row)
 
     return JsonResponse({
             'message': {
