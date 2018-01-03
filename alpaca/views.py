@@ -6,7 +6,7 @@ import json, datetime
 def keyboard(request):
 	return JsonResponse({
 		'type' : 'buttons',
-		'buttons' : ['B1', 'B2', 'B3']
+		'buttons' : ['Coinone', 'Bithumb', 'Bitfinex']
 		})
 
 @csrf_exempt
@@ -15,13 +15,14 @@ def answer(request):
     received_json_data = json.loads(json_str)
     market = received_json_data['content']
     
+
     return JsonResponse({
             'message': {
-                'text': 'test worked'
+                'text': market
             },
             'keyboard': {
                 'type': 'buttons',
-                'buttons': ['B1', 'B2', 'B3']
+                'buttons': ['Coinone', 'Bithumb', 'Bitfinex']
             }
 
         })

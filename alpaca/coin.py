@@ -4,6 +4,7 @@ import json
 import csv
 import os
 import datetime
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 def fetch_cryptocompare():
 	coins = {'BTC','ETH', 'XRP'}
@@ -17,24 +18,26 @@ def fetch_cryptocompare():
 		url = 'https://min-api.cryptocompare.com/data/pricemulti?fsyms=%s&tsyms=%s&e=%s' % (','.join(coins), currency, market)
 		response = requests.get(url)
 		data = response.json()
-		print(data)
 
 		for coin in coins:
 			if response.status_code == requests.codes.ok:
 				_dict[market+'-'+coin+'-'+currency] = data[coin][currency] #data['ETH']['KRW']
 			else:
 				_dict[market+'-'+coin+'-'+currency] = -1
-	return _dict
+
+
+	with open(r'coin.csv', 'w') as f:
+		writer = csv.writer(f)
+		for key, value in _dict.items():
+			writer.writerow([key, value])
+	print("Success")
+
+def scheduler():
+    sched = BlockingScheduler()
+    sched.configure(timezone='Asia/Seoul')
+    sched.add_job(fetch_cryptocompare, 'interval', minutes=1)
+    sched.start()
 
 
 
-ret = fetch_cryptocompare()
-with open(r'coin.csv', 'w') as f:
-	writer = csv.writer(f)
-	for key, value in ret.items():
-		writer.writerow([key, value])
-
-################crontab -l on linux EC2##################
-# * * * * * /usr/bin/python3 /home/ubuntu/coin-2013012405.py
-
-
+scheduler()
