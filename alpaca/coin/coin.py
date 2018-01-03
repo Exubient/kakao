@@ -6,9 +6,8 @@ import os
 import datetime
 
 def fetch_cryptocompare():
-	coins = {'BTC','ETH'}
-	exchanges = {'Coinone':'KRW', 'Bithumb':'KRW', 'Korbit':'KRW'}
-
+	coins = {'BTC','ETH', 'XRP'}
+	exchanges = {'Coinone':'KRW', 'Bithumb':'KRW', 'Bitfinex':'USD'}
 	_dict = {}
 	cur = datetime.datetime.now()
 	timestamp = cur.strftime('%Y-%m-%d-%H:%M')
@@ -16,8 +15,9 @@ def fetch_cryptocompare():
 
 	for market,currency in exchanges.items():
 		url = 'https://min-api.cryptocompare.com/data/pricemulti?fsyms=%s&tsyms=%s&e=%s' % (','.join(coins), currency, market)
-		response = requests.get (url)
+		response = requests.get(url)
 		data = response.json()
+		print(data)
 
 		for coin in coins:
 			if response.status_code == requests.codes.ok:
