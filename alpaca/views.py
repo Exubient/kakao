@@ -37,7 +37,7 @@ def answer(request):
             if(returnButton == info[1] and ret[_dict["user_key"]] == info[0]):
                 return JsonResponse({
                     'message': {
-                        'text': row[1]
+                        'text': row[1] + info[2]
                      },
                     'keyboard':{
                         'type': 'buttons',
