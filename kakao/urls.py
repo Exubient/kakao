@@ -18,7 +18,7 @@ from django.contrib import admin
 from alpaca import views
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^keyboard/', views.keyboard),
-    url(r'message', views.answer),
+    url(r'^admin/', admin.site.urls), #Django default admin site. Allows you to manage database and apps. 
+    url(r'^keyboard/', views.keyboard), #Kakao's test API address
+    url(r'message', views.answer), #Kakao's API address for button request/response
 ]
