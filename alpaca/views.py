@@ -7,7 +7,7 @@ ret ={}
 def keyboard(request):
     return JsonResponse({
         'type' : 'buttons',
-        'buttons' : ['Coinone', 'Bithumb', 'Bitfinex'] #buttons shown at first, default API test
+        'buttons' : ['Coinone', 'Bithumb', 'Bitfinex'] #Kakao default API 테스트용
         })
 
 @csrf_exempt
@@ -25,23 +25,23 @@ def answer(request):
                 ret[_dict["user_key"]] = info[0] #방금 유저가 어떤 시장을 눌렀을지 저장
                 return JsonResponse({
                     'message': {
-                        'text': "you have selected " + returnButton #first response from button
+                        'text': "you have selected " + returnButton #첫번째 버튼set
                      },
                     'keyboard': {
                         'type': 'buttons',
-                        'buttons': ['BTC', 'ETH', 'XRP'] #buttons shown after first response
+                        'buttons': ['BTC', 'ETH', 'XRP'] #response다음으로 보일 버튼
                     }
 
                 })
                 
-            if(returnButton == info[1] and ret[_dict["user_key"]] == info[0]): #find the cell that contains the market user has pressed on ret
+            if(returnButton == info[1] and ret[_dict["user_key"]] == info[0]): #ret에 저장된 시장과 가상화폐에 해당되는 가격 출력
                 return JsonResponse({
                     'message': {
-                        'text': row[1] + info[2] #second response from button
+                        'text': row[1] + info[2] #출력
                      },
                     'keyboard':{
                         'type': 'buttons',
-                        'buttons' : ['Coinone', 'Bithumb', 'Bitfinex'] #set of buttons shown after second response
+                        'buttons' : ['Coinone', 'Bithumb', 'Bitfinex'] #response다음으로 보일 버튼
 
                         }
                 })
