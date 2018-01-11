@@ -25,7 +25,7 @@ def fetch_cryptocompare():
 				#data['ETH']['KRW'], 소수점2자리
 				_dict[market+'-'+coin+'-'+currency] = format(float(data[coin][currency]), ',f')[0:-4] 
 			else:
-				_dict[market+'-'+coin+'-'+currency] = -1 #if request is not ok, store -1
+				_dict[market+'-'+coin+'-'+currency] = -1 #불량 request
 
 
 	with open(r'coin.csv', 'w') as f: # _dict에 저장된 정보를 coin.csv파일에 저장.
