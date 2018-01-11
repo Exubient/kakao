@@ -15,10 +15,10 @@ def fetch_cryptocompare():
 	_dict["Time"] = timestamp
 
 	for market,currency in exchanges.items():
-		#Cyptocompare API/ request information on the coin, currency and market
+		#Cyptocompare API/  해당 코인+시장 정보수집
 		url = 'https://min-api.cryptocompare.com/data/pricemulti?fsyms=%s&tsyms=%s&e=%s' % (','.join(coins), currency, market)
 		response = requests.get(url)
-		data = response.json() #get the response and convert to json
+		data = response.json() #Json으로 data
 
 		for coin in coins: # _dict에 해당 가격정보 저장
 			if response.status_code == requests.codes.ok:
