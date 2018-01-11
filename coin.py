@@ -15,9 +15,10 @@ def fetch_cryptocompare():
 	_dict["Time"] = timestamp
 
 	for market,currency in exchanges.items():
+		#Cyptocompare API/ request information on the coin, currency and market
 		url = 'https://min-api.cryptocompare.com/data/pricemulti?fsyms=%s&tsyms=%s&e=%s' % (','.join(coins), currency, market)
 		response = requests.get(url)
-		data = response.json()
+		data = response.json() #get the response and convert to json
 
 		for coin in coins: # _dict에 해당 가격정보 저장
 			if response.status_code == requests.codes.ok:
@@ -30,7 +31,7 @@ def fetch_cryptocompare():
 		writer = csv.writer(f)
 		for key, value in _dict.items():
 			writer.writerow([key, value])
-	print("Success")
+	print("Success") #코드가 잘 돌고있는지 확인
 
 def scheduler():
     sched = BlockingScheduler()
@@ -40,4 +41,4 @@ def scheduler():
 
 
 
-scheduler()
+scheduler() #START!!!
